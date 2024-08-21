@@ -98,7 +98,7 @@ namespace ASS2_20240802.Controllers
                 // Send confirmation email.
                 var mail = new MailMessage();
                 mail.To.Add(new MailAddress(Request.Form["EmailAddress"]));
-                mail.From = new MailAddress("fit5032_assesment3_ydai0035@outlook.com");
+                mail.From = new MailAddress("@outlook.com");
 
                 mail.Subject = "Appointment Confirmation";
                 mail.Body =
@@ -118,7 +118,7 @@ namespace ASS2_20240802.Controllers
                 smtp.Port = 587;
                 smtp.EnableSsl = true;
                 smtp.Credentials = new System.Net.NetworkCredential
-                    ("fit5032_assesment3_ydai0035@outlook.com", "i7N6f8?$WVqegHu");
+                    ("@outlook.com", "");
                 smtp.Send(mail);
                 return "Success";
             }

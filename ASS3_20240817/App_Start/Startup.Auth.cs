@@ -61,8 +61,8 @@ namespace ASS2_20240802
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "183992748972-tfsir46eb0ujcbitu4pc5ksbbn0crn45.apps.googleusercontent.com",
-                ClientSecret = "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"
+                ClientId = "ClientId",
+                ClientSecret = "ClientSecret"
             });
         }
     }
