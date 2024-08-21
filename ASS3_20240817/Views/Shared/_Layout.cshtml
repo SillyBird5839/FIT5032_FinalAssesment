@@ -1,0 +1,164 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Senior Health Partners</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    <style>
+        .highlight {
+            background-color: #ffff99; /* light yellow background */
+            color: #000000; /* black text color */
+            transition: background-color 0.3s, color 0.3s; /* smooth transition */
+        }
+    </style>
+
+</head>
+<body>
+    <div class="text-dark small" style="padding: 10px;">
+        You can navigate through the menu by clicking or by pressing CTRL+ALT and the corresponding letter indicated in parentheses.
+    </div>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+
+            @Html.ActionLink("Senior Health Partners", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li>@Html.ActionLink("Home(H)", "Index", "Home", new { area = "" }, new { id = "homeLink", @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("About(A)", "About", "Home", new { area = "" }, new { id = "aboutLink", @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Contact(C)", "Contact", "Home", new { area = "" }, new { id = "contactLink", @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Email Appointment(E)", "Create", "HealthCareAppointments", new { area = "" }, new { id = "emailAppointmentLink", @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Map(M)", "Map", "Home", new { area = "" }, new { id = "mapLink", @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("GenAI(G)", "GenAI", "Home", new { area = "" }, new { id = "genAILink", @class = "nav-link" })</li>
+                    @if (User.IsInRole("Doctor"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Doctor Service(S)
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <div class="dropdown-header small">
+                                    You can navigate through this menu using the ↑ and ↓ keys and select with Enter.
+                                </div>
+                                @Html.ActionLink("My Patients", "MyPatients", "DoctorPatientMappings", new { area = "" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Configure My Information", "EditDoctorInformation", "DoctorInformations", new { id = User.Identity.GetUserId() }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Doctor List", "Index", "DoctorInformations", new { id = User.Identity.GetUserId() }, new { @class = "dropdown-item" })
+                            </div>
+                        </li>
+                    }
+                    else if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin Service(S)
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <div class="dropdown-header small">
+                                    You can navigate through this menu using the ↑ and ↓ keys and select with Enter.
+                                </div>
+                                <a class="dropdown-item" href="#">Manage Database</a>
+                                <a class="dropdown-item" href="#">Manage User</a>
+                                @Html.ActionLink("User Action Logs", "Index", "UserActionLogs", new { area = "" }, new { @class = "dropdown-item" })
+                            </div>
+                        </li>
+                    }
+                    else if (User.IsInRole("User"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Service(S)
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <div class="dropdown-header small">
+                                    You can navigate through this menu using the ↑ and ↓ keys and select with Enter.
+                                </div>
+                                @Html.ActionLink("My Doctors", "MyDoctors", "DoctorPatientMappings", new { area = "" }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Doctors (Details/Rating)", "Index", "DoctorRatings", new { id = User.Identity.GetUserId() }, new { @class = "dropdown-item" })
+                                @Html.ActionLink("My Medicine", "Index", "DoctorUserMedications", new { area = "" }, new { @class = "dropdown-item" })
+                            </div>
+                        </li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Health Partners</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/popper.min.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+<script>
+        $(document).on('keydown', function (event) {
+            if (event.ctrlKey && event.altKey) { // 选择ctrl+alt作为辅助键
+                switch (event.key.toUpperCase()) {
+                    case 'H':
+                        // $('#homeLink').click();
+                        $('#homeLink').addClass('highlight').focus();
+                        window.location.href = '@Url.Action("Index", "Home")'; // 直接跳转到 Home 页面
+
+                        break;
+                    case 'A':
+                        $('#aboutLink').addClass('highlight').focus();
+                        window.location.href = '@Url.Action("About", "Home")';
+                        break;
+                    case 'C':
+                        $('#contactLink').addClass('highlight').focus();
+                        window.location.href = '@Url.Action("Contact", "Home")';
+                        break;
+                    case 'E':
+                        $('#emailAppointmentLink').addClass('highlight').focus();
+                        window.location.href = '@Url.Action("Create", "HealthCareAppointments")';
+                        break;
+                    case 'S':
+                        $('#navbarDropdownMenuLink').dropdown('toggle');
+                        break;
+                    case 'M':
+                        $('#mapLink').addClass('highlight').focus();
+                        window.location.href = '@Url.Action("Map", "Home")';
+                        break;
+                    case 'G':
+                        $('#genAILink').addClass('highlight').focus();
+                        window.location.href = '@Url.Action("GenAI", "Home")';
+                        break;
+                    case 'R':
+                        $('#registerLink').addClass('highlight').focus();
+                        window.location.href = '@Url.Action("Register", "Account")';
+                        break;
+                    case 'I':
+                        $('#loginLink').addClass('highlight').focus();
+                        window.location.href = '@Url.Action("Login", "Account")';
+                        break;
+                    case 'O': // Shortcut for logout
+                        $('#logoutLink_ass3').addClass('highlight').focus();
+                        document.getElementById('logoutForm').submit();
+                    break;
+
+
+                }
+            }
+        });
+</script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,59 @@
+﻿@model ASS2_20240802.Models.DoctorUserMedication
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DoctorUserMedication</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrescribingDoctorUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrescribingDoctorUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MedicationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MedicationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MedicationDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MedicationDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DosageInstructions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DosageInstructions)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

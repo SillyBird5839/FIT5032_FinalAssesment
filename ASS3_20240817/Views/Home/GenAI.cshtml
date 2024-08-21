@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "GenAI Chat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GenAI Interaction</h2>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GenAI Chat Interaction</title>
+    <style>
+        #displayBox {
+            width: 100%;
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            white-space: pre-wrap; /* 保留空格和换行 */
+        }
+
+        #inputBox, #sendButton, #toggleButton {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="displayBox"></div>
+    <input type="text" id="inputBox" placeholder="Enter your query here">
+    <button id="sendButton" onclick="sendRequest()">Send</button>
+    <button id="toggleButton" onclick="toggleView()">Toggle View</button>
+    <script>
+        let rawData = '';  // 用于存储原始数据
+        let showRaw = false;  // 当前是否展示原始数据
+
+        function sendRequest() {
+            const user_query = document.getElementById('inputBox').value;
+            const data = {
+                "model": "general",
+                "messages": [{ "role": "user", "content": user_query }],
+                "stream": true
+            };
+
+            fetch('https://localhost:5000/proxy', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            }).then(text => {
+                rawData = text;  // 保存原始数据
+                if (showRaw) {
+                    appendToDisplay(rawData);  // 如果当前是原始数据视图，直接显示
+                } else {
+                    processAndDisplay(text);  // 处理并显示清洗后的数据
+                }
+            }).catch(err => {
+                console.error('Fetch error:', err);
+            });
+        }
+
+        function appendToDisplay(text) {
+            var displayBox = document.getElementById('displayBox');
+            displayBox.textContent = text;
+        }
+
+        function processAndDisplay(text) {
+            const lines = text.split('\n');
+            let processedText = '';
+            lines.forEach(line => {
+                if (line.startsWith('data: ')) {
+                    const content = line.slice(6);  // 获取去除 'data: ' 后的内容
+                    if (content.trim() === "[DONE]") {
+                        // 如果是 [DONE] 标记，就直接返回，不做解析
+                        return;
+                    }
+                    try {
+                        const data = JSON.parse(content);
+                        if (data.choices && data.choices.length > 0) {
+                            processedText += data.choices[0].delta.content;  // 拼接 content 字段
+                        }
+                    } catch (e) {
+                        console.error('JSON parsing error:', e);
+                    }
+                }
+            });
+            appendToDisplay(processedText);
+        }
+
+
+        function toggleView() {
+            showRaw = !showRaw;
+            if (showRaw) {
+                appendToDisplay(rawData);  // 切换到原始数据视图
+            } else {
+                processAndDisplay(rawData);  // 切换到清洗后的数据视图
+            }
+        }
+    </script>
+</body>
+</html>
+

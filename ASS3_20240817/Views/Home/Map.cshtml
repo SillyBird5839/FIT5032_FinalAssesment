@@ -1,0 +1,131 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Map";
+}
+
+<h2>Location Map</h2>
+<div id="container" style="width: 100%; height: 500px;"></div>
+
+<!-- Search UI -->
+<div style="margin-bottom: 10px;">
+    <input type="text" id="searchInput" placeholder="Search locations" style="width: 80%; margin-right: 1%;">
+    <button onclick="searchPlaces()">Search Location</button>
+</div>
+
+<!-- Path Planning UI -->
+<div>
+    <input type="text" id="start" placeholder="Start location (e.g., (120.745253,31.270157))" style="width: 39%; margin-right: 1%;">
+    <input type="text" id="end" placeholder="End location (e.g., (120.745253,31.270157))" style="width: 39%; margin-right: 1%;">
+    <button onclick="planDrivingRoute()">Plan Route</button>
+    <span id="currentLocation">Current Location: Not Available</span>
+</div>
+
+<div id="searchPanel" style="width: 100%; height: 150px; overflow: auto; border: 1px solid #ccc; margin-top: 10px;"></div> <!-- Results panel -->
+<div id="TransPanel" style="width: 100%; height: 150px; overflow: auto; border: 1px solid #ccc; margin-top: 10px;"></div> <!-- Transit results panel -->
+
+
+<script src="https://webapi.amap.com/maps?v=2.0&key=MYKEY"></script>
+
+<script type="text/javascript">
+    window._AMapSecurityConfig = {
+        securityJsCode: 'MYSECRET',
+    };
+
+    var map, geolocation, placeSearch;
+
+    function loadMap() {
+        map = new AMap.Map('container', {
+            resizeEnable: true,
+            zoom: 11,
+        });
+
+        map.plugin('AMap.Geolocation', function () {
+            geolocation = new AMap.Geolocation({
+                enableHighAccuracy: true,
+                timeout: 10000,
+                buttonPosition: 'RB',
+                buttonOffset: new AMap.Pixel(10, 20),
+                zoomToAccuracy: true,
+            });
+            map.addControl(geolocation);
+            geolocation.getCurrentPosition(function (status, result) {
+                if (status === 'complete') {
+                    document.getElementById('currentLocation').textContent = `Current Location: (${result.position.lng},${result.position.lat})`;
+                }
+            });
+        });
+    }
+
+    // 地理位置搜索
+    function searchPlaces() {
+        var input = document.getElementById('searchInput').value;
+        var fcUrl = `https://fit-asspikey-py-vlhcaceidx.cn-hangzhou.fcapp.run/search?keyword=${encodeURIComponent(input)}&city=suzhou`;
+
+        fetch(fcUrl)
+            .then(response => response.json())
+            .then(data => {
+                displayResults(data);
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // 展示搜索结果
+    function displayResults(data) {
+        var panel = document.getElementById('searchPanel');
+        panel.innerHTML = ''; // Clear previous results
+
+        if (data.status === '1' && data.pois) {
+            data.pois.forEach(poi => {
+                var div = document.createElement('div');
+                div.innerHTML = `${poi.name} - ${poi.type} - ${poi.address} - Location: (${poi.location})`;
+                panel.appendChild(div);
+            });
+        } else {
+            panel.innerHTML = 'No results found';
+        }
+    }
+
+    // 路线规划
+    function planDrivingRoute() {
+        var start = document.getElementById('start').value.match(/\(([^)]+)\)/)[1];
+        var end = document.getElementById('end').value.match(/\(([^)]+)\)/)[1];
+        var fcUrl = `https://fit-asspikey-py-vlhcaceidx.cn-hangzhou.fcapp.run/route?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`;
+
+        fetch(fcUrl)
+            .then(response => response.json())
+            .then(data => {
+                displayDrivingResults(data);
+            })
+            .catch(error => console.error('Error in driving routing:', error));
+    }
+
+    // 展示路线规划结果
+    function displayDrivingResults(data) {
+        var panel = document.getElementById('TransPanel');
+        panel.innerHTML = ''; // Clear previous results
+
+        if (data.status === '1' && data.route && data.route.paths.length > 0) {
+            data.route.paths.forEach((path, index) => {
+                var div = document.createElement('div');
+                div.innerHTML = `<strong>Route ${index + 1} (Distance: ${path.distance}m)</strong><ul>`;
+
+                path.steps.forEach(step => {
+                    div.innerHTML += `<li>${step.instruction} - ${step.step_distance}m on ${step.road_name || 'unknown road'}</li>`;
+                });
+
+                div.innerHTML += `</ul><br>Total Estimated Taxi Cost: ${data.route.taxi_cost}元`;
+                panel.appendChild(div);
+            });
+        } else {
+            panel.innerHTML = 'No driving routes found.';
+        }
+    }
+
+    window.onload = loadMap;
+
+
+
+
+
+    window.onload = loadMap;
+</script>
