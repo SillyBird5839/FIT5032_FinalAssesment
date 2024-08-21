@@ -1,0 +1,65 @@
+﻿
+@using Microsoft.AspNet.Identity;
+
+@model IEnumerable<ASS2_20240802.Models.DoctorPatientMapping>
+
+@{
+    ViewBag.Title = "Doctor Patient Mappings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (User.IsInRole("Doctor"))
+{
+    <h2>@ViewBag.Title</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Patient Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.User.Email</td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })   |
+                        @Html.ActionLink("View Medications", "Index", "DoctorUserMedications", new { userId = item.UserId }, null)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div id="non-doctor-message">
+        <p>This page is only for Doctors</p>
+    </div>
+    <script>
+        setTimeout(function() {
+            window.location.href = '@Url.Action("Index", "Home")'; // Redirect to Home after 2 seconds
+        }, 2000);
+    </script>
+}
+
+
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable();
+        });
+    </script>
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" />

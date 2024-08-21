@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ASS2_20240802.Models.ActionCountViewModel>
+
+<h2>Action Name Statistics</h2>
+
+<div style="display: flex; justify-content: center; align-items: flex-start;">
+    <!-- Chart Container -->
+    <div style="flex: 1; max-width: 50%;">
+        <canvas id="actionNameChart"></canvas>
+    </div>
+
+    <!-- Legend Container -->
+    <div style="flex: 1; max-width: 50%; padding-left: 20px;">
+        @foreach (var item in Model)
+        {
+            <div>@item.ActionName: @item.Count</div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('actionNameChart').getContext('2d');
+        var actionNameChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: @Html.Raw(Json.Encode(Model.Select(m => m.ActionName))),
+                datasets: [{
+                    label: 'Action Count',
+                    data: @Html.Raw(Json.Encode(Model.Select(m => m.Count))),
+                    backgroundColor: [
+                        'red', 'blue', 'green', 'yellow', 'purple', 'orange' // Add more colors as needed
+                    ],
+                    borderColor: 'white',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // This ensures the canvas size is responsive
+                plugins: {
+                    legend: {
+                        display: false // Hide Chart.js default legend since we're using a custom one
+                    }
+                }
+            }
+        });
+    </script>
+}

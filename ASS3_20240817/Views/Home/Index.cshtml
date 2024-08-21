@@ -1,0 +1,186 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <div class="container mt-4">
+        <h1>Welcome to Senior Health Partners</h1>
+        <div class="mb-3">
+            <img src="~/images/jYh8F6iIB4.jpg" class="img-fluid" alt="Scenic view of a sunset behind hills, enhancing the home page atmosphere">
+        </div>
+        <div class="row">
+            @if (User.IsInRole("Doctor"))
+            {
+                <!-- Existing Doctor Services -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-right" src="~/images/doctor-patients.png" alt="Image depicting a doctor interacting with patients">
+                        <div class="card-body">
+                            <h5 class="card-title">My Patients</h5>
+                            <p class="card-text">Manage and view all assigned patients.</p>
+                            <a href="@Url.Action("MyPatients", "DoctorPatientMappings")" class="btn btn-primary">Manage Patients</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-right" src="~/images/my-information.png" alt="Icon showing a person with a settings gear, representing personal settings management">
+                        <div class="card-body">
+                            <h5 class="card-title">Configure My Information</h5>
+                            <p class="card-text">Update personal and professional details.</p>
+                            <a href="@Url.Action("EditDoctorInformation", "DoctorInformations", new { id = User.Identity.GetUserId() })" class="btn btn-primary">Edit Information</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-right" src="~/images/doctor-list.png" alt="Clipboard icon representing a list of doctors">
+                        <div class="card-body">
+                            <h5 class="card-title">Doctor List</h5>
+                            <p class="card-text">View and manage list of doctors.</p>
+                            <a href="@Url.Action("Index", "DoctorInformations")" class="btn btn-primary">View List</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Functions (placeholders) -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">New Functions</h5>
+                            <p class="card-text">New features coming soon.</p>
+                            <button class="btn btn-secondary" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">New Functions</h5>
+                            <p class="card-text">New features coming soon.</p>
+                            <button class="btn btn-secondary" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">New Functions</h5>
+                            <p class="card-text">New features coming soon.</p>
+                            <button class="btn btn-secondary" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            else if (User.IsInRole("Admin"))
+            {
+                <!-- Existing Admin Services -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage Database</h5>
+                            <p class="card-text">Access and administer the entire database.</p>
+                            <button class="btn btn-primary" disabled>Access Database</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage Users</h5>
+                            <p class="card-text">Configure user roles and access permissions.</p>
+                            <button class="btn btn-primary" disabled>Manage Users</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">User Action Logs</h5>
+                            <p class="card-text">Monitor and manage user activities.</p>
+                            <a href="@Url.Action("Index", "UserActionLogs")" class="btn btn-primary">View Logs</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Functions (placeholders) -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">New Functions</h5>
+                            <p class="card-text">New features coming soon.</p>
+                            <button class="btn btn-secondary" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">New Functions</h5>
+                            <p class="card-text">New features coming soon.</p>
+                            <button class="btn btn-secondary" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (User.IsInRole("User"))
+            {
+                <!-- Existing User Services -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-right" src="~/images/doctor-consultation.png" alt="Graphic of a doctor consultation, indicating services for consulting with doctors">
+                        <div class="card-body">
+                            <h5 class="card-title">My Doctors</h5>
+                            <p class="card-text">View details and contact your doctors.</p>
+                            <a href="@Url.Action("MyDoctors", "DoctorPatientMappings")" class="btn btn-primary">View Doctors</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-right" src="~/images/doctor-details.png" alt="Two doctors, symbolizing the ability to view doctor profiles and ratings">
+                        <div class="card-body">
+                            <h5 class="card-title">Doctors (Details/Rating)</h5>
+                            <p class="card-text">View detailed profiles and rate our doctors.</p>
+                            <a href="@Url.Action("Index", "DoctorRatings", new { id = User.Identity.GetUserId() })" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <img class="card-img-right" src="~/images/medication.png" alt="Medication pills, indicating medicine management features">
+                        <div class="card-body">
+                            <h5 class="card-title">My Medicine</h5>
+                            <p class="card-text">Track and manage your medications.</p>
+                            <a href="@Url.Action("Index", "DoctorUserMedications")" class="btn btn-primary">Manage Medicine</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Functions (placeholders) -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">New Functions</h5>
+                            <p class="card-text">New features coming soon.</p>
+                            <button class="btn btn-secondary" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">New Functions</h5>
+                            <p class="card-text">New features coming soon.</p>
+                            <button class="btn btn-secondary" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</main>

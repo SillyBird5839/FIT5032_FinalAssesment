@@ -1,0 +1,186 @@
+﻿@model ASS2_20240802.Models.HealthCareAppointments
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+        <title> Make an Appointment with a Doctor </title>
+
+    </head>
+
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <!-- Appointment Column -->
+                <div class="col-md-4">
+                    <h4 align="center">Make an Appointment</h4>
+                    <input type="text" id="patient" placeholder="Patient ID" class="form-control"> <br />
+                    <input type="text" id="doctor" placeholder="Doctor ID" class="form-control"> <br />
+                    <input type="date" id="appointment-date" value="2024-07-8" class="form-control"> <br />
+                    <div>Upload Your Medical History</div>
+                    <input type="file" id="attachment" class="form-control"> <br />
+                    <input type="text" id="email-address" placeholder="Your Email Address" class="form-control">
+                    <br />
+                    <button type="button" class="btn btn-primary" onClick="MakeAppointment()">Make an Appointment</button>
+                </div>
+
+                <!-- Single Email Test Column -->
+                <div class="col-md-4">
+                    <h4 align="center">Send Test Email</h4>
+                    <input type="text" id="test-email" placeholder="Test Email Address" class="form-control">
+                    <button type="button" class="btn btn-success" onClick="sendTestEmail()">Send Test Email</button>
+                </div>
+
+                <!-- Bulk Email Test Column -->
+                <div class="col-md-4">
+                    <h4 align="center">Send Bulk Email</h4>
+                    <div id="email-list">
+                        <input type="text" class="form-control bulk-email" placeholder="Email Address">
+                    </div>
+                    <button type="button" class="btn btn-info" onClick="addEmailField()">Add Another Email</button>
+                    <button type="button" class="btn btn-warning" onClick="sendBulkEmail()">Send Bulk Email</button>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+        <script>
+
+            function addEmailField() {
+                var newInput = $('<input>', {
+                    type: 'text',
+                    class: 'form-control bulk-email',
+                    placeholder: 'Email Address'
+                });
+                $('#email-list').append(newInput);
+            }
+
+            function MakeAppointment() {
+
+                // Get the data from the input field.
+                const PatientID = document.getElementById("patient").value;
+                const DoctorID = document.getElementById("doctor").value;
+                const AppointmentDate = document.getElementById("appointment-date").value;
+
+                const EmailAddress = document.getElementById("email-address").value;
+                const Attachment = document.querySelector('#attachment').files[0];
+                alert("Attachment size: " + Attachment.size + " bytes.");
+
+
+                // Create a Form data:
+                var SentData = new FormData();
+                SentData.append("PatientID", PatientID);
+                SentData.append("DoctorID", DoctorID);
+                SentData.append("AppointmentDate", AppointmentDate);
+                SentData.append("EmailAddress", EmailAddress);
+                SentData.append("Attachment", Attachment);
+
+                for (var pair of SentData.entries()) {
+                    alert(pair[0] + ': ' + pair[1]);
+                }
+
+                // Make a POST request to the controller action with the data.
+                $.ajax({
+                    url: "/HealthCareAppointments/CreateAppointment",
+                    type: "POST",
+                    data: SentData,
+                    processData: false,
+                    contentType: false,
+                    async: false,
+                    success: function (response) {
+                        // Handle the response from the server
+                        if (response = "Success") {
+                            alert("Patient[" + PatientID + "] and Doctor[" + DoctorID + "] have made an appointment on " + AppointmentDate + ".");
+                        }
+                        else {
+                            alert(response.statusText);
+                        }
+                    },
+                    error: function (error) {
+                        // Handle any errors from the server.
+                        alert(error.statusText);
+                    }
+                });
+            }
+
+            function sendTestEmail() {
+                var emailData = {
+                    "from": "fit5032_assesment3_ydai0035@outlook.com",
+                    "to": document.getElementById("test-email").value,
+                    "subject": "Hello from SendGrid",
+                    "content": "This is a test email sent via SendGrid."
+                };
+
+                $.ajax({
+                    url: "https://fit-asspikey-py-vlhcaceidx.cn-hangzhou.fcapp.run/send_email",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(emailData),
+                    success: function (response) {
+                        alert("Test email sent successfully!");
+                    },
+                    error: function (error) {
+                        alert("Failed to send test email: " + error.statusText);
+                    }
+                });
+            }
+
+
+            function sendBulkEmail() {
+                var emailInputs = document.querySelectorAll('.bulk-email');
+                var emails = Array.from(emailInputs).map(input => input.value.trim()).filter(email => email.length > 0);
+                var emailData = {
+                    "from": "fit5032_assesment3_ydai0035@outlook.com",
+                    "to": emails, // 这里现在是一个包含多个邮箱的数组
+                    "subject": "Hello from SendGrid - Bulk Email",
+                    "content": "This is a test bulk email sent via SendGrid."
+                };
+
+                $.ajax({
+                    url: "https://fit-asspikey-py-vlhcaceidx.cn-hangzhou.fcapp.run/send_bulk_email",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(emailData),
+                    success: function (response) {
+                        alert("Bulk email sent successfully!");
+                    },
+                    error: function (error) {
+                        alert("Failed to send bulk email: " + error.statusText);
+                    }
+                });
+            }
+
+        </script>
+
+    </body>
+
+    <style>
+        input {
+            margin: 5px;
+        }
+    </style>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+}
