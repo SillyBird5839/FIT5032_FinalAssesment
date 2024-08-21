@@ -1,0 +1,139 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|f:\\fit5032\\fit5032_finalassesment\\ass3_20240817\\controllers\\healthcareappointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|solutionrelative:controllers\\healthcareappointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\views\\healthcareappointments\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|solutionrelative:views\\healthcareappointments\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\app_start\\startup.auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|solutionrelative:app_start\\startup.auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\views\\home\\map.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|solutionrelative:views\\home\\map.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\views\\home\\genai.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|solutionrelative:views\\home\\genai.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D2CD077-4239-45F5-9D7A-59DAE13F26B7}|ASS2_20240802.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HealthCareAppointmentsController.cs",
+              "DocumentMoniker": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\Controllers\\HealthCareAppointmentsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HealthCareAppointmentsController.cs",
+              "ToolTip": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\Controllers\\HealthCareAppointmentsController.cs",
+              "RelativeToolTip": "Controllers\\HealthCareAppointmentsController.cs",
+              "ViewState": "AQIAAFsAAAAAAAAAAAAkwHIAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T07:49:24.976Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AQIAAE4AAAAAAAAAAAAowAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T07:49:19.429Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\Views\\HealthCareAppointments\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\HealthCareAppointments\\Create.cshtml",
+              "ToolTip": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\Views\\HealthCareAppointments\\Create.cshtml",
+              "RelativeToolTip": "Views\\HealthCareAppointments\\Create.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-21T07:48:44.285Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Startup.Auth.cs",
+              "DocumentMoniker": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\App_Start\\Startup.Auth.cs",
+              "RelativeDocumentMoniker": "App_Start\\Startup.Auth.cs",
+              "ToolTip": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\App_Start\\Startup.Auth.cs",
+              "RelativeToolTip": "App_Start\\Startup.Auth.cs",
+              "ViewState": "AQIAAC4AAAAAAAAAAAAQwDsAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T07:47:12.153Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Map.cshtml",
+              "DocumentMoniker": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\Views\\Home\\Map.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Map.cshtml",
+              "ToolTip": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\Views\\Home\\Map.cshtml",
+              "RelativeToolTip": "Views\\Home\\Map.cshtml",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAAAFcAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-21T07:11:36.221Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAACYAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-19T18:46:03.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GenAI.cshtml",
+              "DocumentMoniker": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\Views\\Home\\GenAI.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\GenAI.cshtml",
+              "ToolTip": "F:\\Fit5032\\FIT5032_FinalAssesment\\ASS3_20240817\\Views\\Home\\GenAI.cshtml",
+              "RelativeToolTip": "Views\\Home\\GenAI.cshtml",
+              "ViewState": "AQIAADwAAAAAAAAAAAAAAFEAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-19T14:51:25.072Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

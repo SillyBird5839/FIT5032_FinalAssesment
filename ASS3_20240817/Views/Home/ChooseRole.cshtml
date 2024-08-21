@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Choose Role";
+}
+
+<h2>Choose Your Role</h2>
+<p>Please select your role to continue.</p>
+
+@using (Html.BeginForm("SetRole", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label>Select Role:</label>
+        <select name="userRole" class="form-control">
+            <option value="Doctor">Doctor</option>
+            <option value="User">User</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+}

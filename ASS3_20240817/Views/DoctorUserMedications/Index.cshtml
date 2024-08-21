@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ASS2_20240802.Models.MedicationViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Medications Management";
+}
+
+<h2>@ViewBag.Title</h2>
+@if (User.IsInRole("Doctor"))
+{
+
+    @Html.ActionLink("Create New Medication", "Create", "DoctorUserMedications", new { userId = ViewBag.UserId }, new { @class = "btn btn-primary" })
+}
+else
+{
+    @Html.ActionLink("Create New Medication", "Create", "DoctorUserMedications", new { area = "" }, new { @class = "btn btn-primary" })
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Medication Name</th>
+            <th>User Email</th>
+            <th>Prescribing Doctor Email</th>
+            <th>Description</th>
+            <th>Dosage Instructions</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MedicationName</td>
+                <td>@item.UserEmail</td>
+                <td>@item.PrescribingDoctorEmail</td>
+                <td>@item.MedicationDescription</td>
+                <td>@item.DosageInstructions</td>
+                <td>
+                    @if (item.CanEdit)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.UserId })
+                    }|
+                    @Html.ActionLink("Details", "Details", new { id = item.UserId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
+    <script>
+ $(document).ready(function () {
+ $('.table').DataTable();
+ });
+    </script>
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" />

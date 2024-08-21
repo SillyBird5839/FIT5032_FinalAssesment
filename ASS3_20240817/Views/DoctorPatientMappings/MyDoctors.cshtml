@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ASS2_20240802.Models.DoctorViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "My Doctors";
+}
+
+<h2>My Doctors</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Major</th>
+            <th>Phone</th>
+            <th>Contact</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var doctor in Model)
+        {
+            <tr>
+                <td>@doctor.Email</td>
+                <td>@doctor.Name</td>
+                <td>@doctor.Major</td>
+                <td>@doctor.PhoneNumber</td>
+                <td>
+                    <a href="mailto:@doctor.Email" class="btn btn-primary">Send an Email</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
+    <script>
+ $(document).ready(function () {
+ $('.table').DataTable();
+ });
+    </script>
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" />
+
